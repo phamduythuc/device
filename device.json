@@ -1,0 +1,133 @@
+{
+    "device": [
+        {
+            "id": 1,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        },
+        {
+            "id": 3,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        },
+        {
+            "id": 4,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        },
+        {
+            "id": 6,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        },
+        {
+            "id": 7,
+            "name": "Bài viết 1",
+            "seri": "MLP4",
+            "type": "pc",
+            "allotment": {
+                "receiver": "pham duy",
+                "handover_person": [
+                    "me",
+                    "friend",
+                    "devoleper"
+                ],
+                "date": "20-11-2022",
+                "status": "active",
+                "image": "http://test.jpg"
+            }
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+}
