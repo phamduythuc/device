@@ -4,12 +4,14 @@ import { DeviceComponent } from './device/device.component';
 import {DeviceRoutingModule} from "./device-routing.module";
 import {MaterialModule} from "../../material.module";
 import { HttpClientModule } from '@angular/common/http';
+import { AddDeviceComponent } from './add-device/add-device.component';
 
 
 
 @NgModule({
   declarations: [
-    DeviceComponent
+    DeviceComponent,
+    AddDeviceComponent
   ],
   imports: [
     CommonModule,

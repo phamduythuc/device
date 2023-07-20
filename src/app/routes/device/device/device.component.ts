@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../service/device.service';
 import { LoginService } from '@core';
+import {MatDialog} from "@angular/material/dialog";
+import {AddDeviceComponent} from "../add-device/add-device.component";
 export interface Device {
     id?: number | string | null;
     name?: string;
@@ -19,7 +21,7 @@ export class DeviceComponent implements OnInit {
     sizeIndex = 5;
     device: Device[] = [];
     displayColumns = ['STT', 'name', 'seri', 'type', 'action'];
-    constructor(private deviceService: DeviceService, private loginService: LoginService) {
+    constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog) {
     }
 
 
@@ -36,5 +38,13 @@ export class DeviceComponent implements OnInit {
             console.log(this.device);
             },
         );
+    }
+    addDevice(): void {
+       const diaLogRef =  this.diaLog.open(AddDeviceComponent, {
+           data: {title: 'new'}
+       })
+        diaLogRef.afterClosed().subscribe(result => {
+
+        })
     }
 }
