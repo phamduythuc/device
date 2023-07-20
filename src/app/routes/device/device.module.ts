@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DeviceComponent } from './device/device.component';
 import {DeviceRoutingModule} from "./device-routing.module";
 import {MaterialModule} from "../../material.module";
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,6 +14,7 @@ import {MaterialModule} from "../../material.module";
   imports: [
     CommonModule,
     DeviceRoutingModule,
+      HttpClientModule,
     MaterialModule,
   ]
 })

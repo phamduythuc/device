@@ -1,8 +1,12 @@
 {
     "device": [
-        {
-            "name": "máy tình mac",
-            "date": "20-11-2022"
-        }
+        { "id": 1, "title": "Bài viết 1" },
+        { "id": 2, "title": "Bài viết 2" },
+        { "id": 3, "title": "Bài viết 3" },
+        { "id": 4, "title": "Bài viết 4" },
+        { "id": 5, "title": "Bài viết 5" },
+        { "id": 6, "title": "Bài viết 6" },
+        { "id": 7, "title": "Bài viết 7" },
+        { "id": 8, "title": "Bài viết 8" }
     ]
 }

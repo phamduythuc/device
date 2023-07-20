@@ -6,7 +6,7 @@ export interface User {
   email?: string;
   avatar?: string;
   roles?: any[];
-  permissions?: any[];
+  permissions?: any;
 }
 
 export interface Token {
