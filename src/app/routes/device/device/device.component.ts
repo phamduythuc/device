@@ -41,10 +41,11 @@ export class DeviceComponent implements OnInit {
     }
     addDevice(): void {
        const diaLogRef =  this.diaLog.open(AddDeviceComponent, {
-           data: {title: 'new'}
-       })
+           data: {title: 'new'},
+           panelClass: ['w-[80%]']
+       });
         diaLogRef.afterClosed().subscribe(result => {
 
-        })
+        });
     }
 }

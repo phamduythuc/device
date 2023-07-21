@@ -1,3 +1,40 @@
-<div class="w-full p-5">
-    <h2 class="py-5 border-b-2">New Device</h2>
+<div class='w-full p-6'>
+    <h2 class='py-5 border-b-2 mb-8'>New Device</h2>
+    <form class='w-full'>
+        <div class='w-full flex flex-col'>
+            <div class='flex space-x-3'>
+                <div class='w-full flex flex-col'>
+                    <mat-label>Name</mat-label>
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+
+                <div class='w-full flex flex-col'>
+                    <mat-label>Loại Thiết bị</mat-label>
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+
+                <div class='w-full flex flex-col'>
+                    <mat-label>Seri</mat-label>
+                    <mat-form-field>
+                        <input matInput>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class='flex flex-col'>
+                <mat-label>Ngày nhập thiết bị</mat-label>
+                <mat-form-field>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+            <div class='w-full flex items-center justify-center space-x-3'>
+                <button mat-raised-button>Save</button>
+                <button mat-raised-button class=''>cancel</button>
+            </div>
+        </div>
+    </form>
 </div>
