@@ -74,7 +74,7 @@ export class SettingsService {
   }
 
   setTheme() {
-    if (this.options.theme === 'light') {
+    if (this.options.theme === 'dark') {
       this.htmlElement.classList.add('theme-dark');
     } else {
       this.htmlElement.classList.remove('theme-dark');

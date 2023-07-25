@@ -3,8 +3,8 @@
         {
             "id": 1,
             "name": "Bài viết 1",
-            "seri": "MLP4",
-            "type": "pc",
+            "serial": "MLP4",
+            "type": "PC",
             "allotment": {
                 "receiver": "pham duy",
                 "handover_person": [
@@ -12,9 +12,10 @@
                     "friend",
                     "devoleper"
                 ],
-                "date": "20-11-2022",
+                "date": "2023-07-15T17:00:00.000Z",
                 "status": "active",
                 "image": "http://test.jpg"
+
             }
         },
         {

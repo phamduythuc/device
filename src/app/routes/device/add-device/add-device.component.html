@@ -1,40 +1,140 @@
-<div class='w-full p-6'>
-    <h2 class='py-5 border-b-2 mb-8'>New Device</h2>
-    <form class='w-full'>
+<div class='w-full p-6 overflow-y-auto'>
+    <form class='w-full' [formGroup]="formGroup">
+        <div class="py-2 flex items-center justify-between 5 border-b-2 mb-6">
+            <h2 class='text-2xl font-medium'>New Device</h2>
+            <button mat-icon-button (click)="diaLogRef.close()">
+                <mat-icon class="cursor-pointer">close</mat-icon>
+            </button>
+        </div>
         <div class='w-full flex flex-col'>
             <div class='flex space-x-3'>
                 <div class='w-full flex flex-col'>
-                    <mat-label>Name</mat-label>
+                    <mat-label><span>Name <sub class="text-2xl text-red-600">*</sub></span></mat-label>
                     <mat-form-field>
-                        <input matInput>
+                        <input matInput formControlName="name">
                     </mat-form-field>
                 </div>
 
                 <div class='w-full flex flex-col'>
-                    <mat-label>Loại Thiết bị</mat-label>
+                    <mat-label><span>Type device <sub class="text-2xl text-red-600">*</sub></span></mat-label>
                     <mat-form-field>
-                        <input matInput>
-                    </mat-form-field>
-                </div>
-
-                <div class='w-full flex flex-col'>
-                    <mat-label>Seri</mat-label>
-                    <mat-form-field>
-                        <input matInput>
+                        <mat-select formControlName="type">
+                            <mat-option *ngFor="let item of devices" [value]="item">
+                                {{item}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
 
             </div>
-            <div class='flex flex-col'>
-                <mat-label>Ngày nhập thiết bị</mat-label>
-                <mat-form-field>
-                    <input matInput>
-                </mat-form-field>
+            <div class="flex space-x-3">
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Seri <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="serial">
+                    </mat-form-field>
+                </div>
+
+
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Date of device acquisition <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" formControlName="deviceAddDate" placeholder="MM/DD/YYYY">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class='w-full flex items-center justify-center space-x-3'>
-                <button mat-raised-button>Save</button>
-                <button mat-raised-button class=''>cancel</button>
+            <div class="w-full mt-2 mb-5">
+                <mat-label><span>Image</span></mat-label>
+                <ngx-dropzone #drop (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif"
+                              [multiple]="true">
+                    <ngx-dropzone-label>Select image!</ngx-dropzone-label>
+                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+                                                [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-image-preview>
+                </ngx-dropzone>
             </div>
         </div>
     </form>
+
+    <ng-container *ngIf="allocate">
+        <form class="w-full" [formGroup]="formHandOver">
+            <div class="py-2 flex items-center justify-between 5 border-b-2 mb-6">
+                <h2 class='text-2xl font-medium'>{{this.data.title}}</h2>
+            </div>
+            <div class="flex space-x-3">
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Handover person <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="handover_person">
+                    </mat-form-field>
+                </div>
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Receiver <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="receiver">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Position <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="position">
+                    </mat-form-field>
+                </div>
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Status <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="status">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Date of delivery <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="dateOfDelivery">
+                    </mat-form-field>
+                </div>
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Onsite <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="onsite">
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="flex space-x-3">
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Hotline <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="hotline">
+                    </mat-form-field>
+                </div>
+                <div class='w-1/2 flex flex-col'>
+                    <mat-label><span>Email <sub class="text-2xl text-red-600">*</sub></span></mat-label>
+                    <mat-form-field>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="w-full">
+                <mat-label>Ghi chú</mat-label>
+                <mat-form-field class="w-full">
+                    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                </mat-form-field>
+            </div>
+        </form>
+
+    </ng-container>
+    <div class='w-full flex items-center justify-center space-x-3'>
+        <button mat-raised-button type="button">Save</button>
+        <button mat-raised-button class='' type="button" (click)="diaLogRef.close()">cancel</button>
+    </div>
 </div>
+
+
