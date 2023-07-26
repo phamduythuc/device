@@ -68,7 +68,11 @@
                 <div class='w-1/2 flex flex-col'>
                     <mat-label><span>Handover person <sub class="text-2xl text-red-600">*</sub></span></mat-label>
                     <mat-form-field>
-                        <input matInput formControlName="handover_person">
+                        <mat-select formControlName="handover_person">
+                            <mat-option *ngFor='let el of handover_person' [value]='el'>
+                                {{el}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div class='w-1/2 flex flex-col'>
@@ -96,13 +100,19 @@
                 <div class='w-1/2 flex flex-col'>
                     <mat-label><span>Date of delivery <sub class="text-2xl text-red-600">*</sub></span></mat-label>
                     <mat-form-field>
-                        <input matInput formControlName="dateOfDelivery">
+                        <input matInput [matDatepicker]="picker" formControlName="dateOfDelivery" placeholder="MM/DD/YYYY">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
                 <div class='w-1/2 flex flex-col'>
                     <mat-label><span>Onsite <sub class="text-2xl text-red-600">*</sub></span></mat-label>
                     <mat-form-field>
-                        <input matInput formControlName="onsite">
+                        <mat-select formControlName="onsite">
+                            <mat-option *ngFor='let el of onsite' [value]='el'>
+                                {{el}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
 

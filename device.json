@@ -5,6 +5,7 @@
             "name": "Bài viết 1",
             "serial": "MLP4",
             "type": "PC",
+            "status": 1,
             "allotment": {
                 "receiver": "pham duy",
                 "handover_person": [
@@ -40,6 +41,7 @@
             "name": "Bài viết 1",
             "seri": "MLP4",
             "type": "pc",
+            "status": 0,
             "allotment": {
                 "receiver": "pham duy",
                 "handover_person": [

@@ -22,7 +22,7 @@ export class DeviceComponent implements OnInit {
     pageIndex = 0;
     sizeIndex = 5;
     device: Device[] = [];
-    displayColumns = ['STT', 'name', 'seri', 'type', 'action'];
+    displayColumns = ['STT', 'name', 'seri', 'type', 'status', 'action'];
 
 
     constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog) {
@@ -51,7 +51,7 @@ export class DeviceComponent implements OnInit {
         });
     }
     deviceAllocation (device: Device): void {
-        console.log(device)
+
         this.diaLog.open(AddDeviceComponent, {
             data: {
                 title: "Device allocation",
@@ -59,7 +59,28 @@ export class DeviceComponent implements OnInit {
                 data: device
             },
             panelClass: ['w-[80%]', 'h-[75%]']
-        })
+        });
+    }
+    editDevice(device: Device): void {
+        console.log(device);
+        this.diaLog.open(AddDeviceComponent, {
+            data: {
+                title: "Edit infor device",
+                action: 'edit',
+                data: device
+            },
+            panelClass: ['w-[80%]', 'h-[75%]']
+        });
+    }
+    actionsDevice(device: Device, action: string): void {
+        this.diaLog.open(AddDeviceComponent, {
+            data: {
+                title: action === 'view' ? 'View infor device' : '',
+                action: action,
+                data: device
+            },
+            panelClass: ['w-[80%]', 'h-[75%]']
+        });
     }
 
 }
