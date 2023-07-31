@@ -21,6 +21,7 @@ import { ErrorCodeComponent } from './components/error-code/error-code.component
 import { DisableControlDirective } from './directives/disable-control.directive';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { ToObservablePipe } from './pipes/to-observable.pipe';
+import { ComfirmDialogComponent } from './components/comfirm-dialog/comfirm-dialog.component';
 
 const MODULES: any[] = [
   CommonModule,
@@ -46,6 +47,6 @@ const PIPES: any[] = [SafeUrlPipe, ToObservablePipe];
 @NgModule({
   imports: [...MODULES],
   exports: [...MODULES, ...COMPONENTS, ...DIRECTIVES, ...PIPES],
-  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, ...DIRECTIVES, ...PIPES],
+  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, ...DIRECTIVES, ...PIPES, ComfirmDialogComponent],
 })
 export class SharedModule {}

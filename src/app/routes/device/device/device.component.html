@@ -31,11 +31,11 @@
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <td mat-cell *matCellDef="let element">
                     <div class='flex gap-x-2'>
-                        <mat-icon class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" matTooltip='Lấy qr code' matTooltipPosition='before'>qr_code_scanner</mat-icon>
-                        <mat-icon  class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" matTooltip='Phân bổ thiết bị. Quyền phân bổ dưới quyền quản lý là những người có vai trò bộ phận cty' matTooltipPosition='before' (click)="deviceAllocation(element)">devices</mat-icon>
-                        <mat-icon class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)='actionsDevice(element, "view")'>visibility</mat-icon>
-                        <mat-icon class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" (click)='editDevice(element)' >edit</mat-icon>
-                        <mat-icon class='cursor-pointer'  aria-hidden="false" aria-label="Example thumbs up SVG icon">delete</mat-icon>
+                        <mat-icon class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" matTooltip='Lấy qr code' matTooltipPosition='before' (click)='actionsDevice(element, "qr-code")'>qr_code_scanner</mat-icon>
+                        <mat-icon  class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" matTooltip='Phân bổ thiết bị. Quyền phân bổ dưới quyền quản lý là những người có vai trò bộ phận cty' matTooltipPosition='above' (click)="deviceAllocation(element)">devices</mat-icon>
+                        <mat-icon class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon" matTooltip='View detail' matTooltipPosition="above" (click)='actionsDevice(element, "view")'>visibility</mat-icon>
+                        <mat-icon class='cursor-pointer' aria-hidden="false" aria-label="Example thumbs up SVG icon"  matTooltip='Edit' matTooltipPosition="above" (click)='editDevice(element)' >edit</mat-icon>
+                        <mat-icon class='cursor-pointer'  aria-hidden="false" aria-label="Example thumbs up SVG icon"  matTooltip='Delete' matTooltipPosition="above" (click)="deleteDevice()">delete</mat-icon>
 
                     </div>
                 </td>

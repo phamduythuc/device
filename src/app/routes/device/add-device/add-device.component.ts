@@ -52,6 +52,7 @@ export class AddDeviceComponent implements OnInit {
                 this.getDataAddDevice();
                 this.getDataReceiveDevice();
             }
+
         }
     }
 

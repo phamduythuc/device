@@ -3,6 +3,8 @@ import {DeviceService} from '../service/device.service';
 import {LoginService} from '@core';
 import {MatDialog} from "@angular/material/dialog";
 import {AddDeviceComponent} from "../add-device/add-device.component";
+import {ComfirmDialogComponent} from "@shared/components/comfirm-dialog/comfirm-dialog.component";
+import {QrCodeComponent} from "../qr-code/qr-code.component";
 
 export interface Device {
     id?: number | string | null;
@@ -73,14 +75,34 @@ export class DeviceComponent implements OnInit {
         });
     }
     actionsDevice(device: Device, action: string): void {
-        this.diaLog.open(AddDeviceComponent, {
+        if (action !== 'qr-code') {
+            this.diaLog.open(AddDeviceComponent, {
+                data: {
+                    title: action === 'view' ? 'View infor device' : '',
+                    action: action,
+                    data: device
+                },
+                panelClass: ['w-[80%]', 'h-[75%]']
+            });
+        }else {
+            this.diaLog.open(QrCodeComponent, {
+                data: {
+                    title: 'View QR code',
+                    action: action,
+                    data: device
+                },
+                panelClass: ['w-[40%]', 'h-[60%]']
+            });
+        }
+    }
+    deleteDevice(): void {
+        this.diaLog.open(ComfirmDialogComponent, {
             data: {
-                title: action === 'view' ? 'View infor device' : '',
-                action: action,
-                data: device
+                title: '',
+                action: ''
             },
-            panelClass: ['w-[80%]', 'h-[75%]']
-        });
+            panelClass: ['w-[35%]']
+        })
     }
 
 }

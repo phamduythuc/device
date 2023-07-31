@@ -11,6 +11,7 @@ import { Error403Component } from './sessions/403.component';
 import { Error404Component } from './sessions/404.component';
 import { Error500Component } from './sessions/500.component';
 import { authGuard } from '@core';
+import {ViewQrCodeDeviceManagerComponent} from "./view-qr-code-device-manager/view-qr-code-device-manager.component";
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
     ],
   },
+    {
+      path : 'view-detail',
+      component: ViewQrCodeDeviceManagerComponent
+    },
   { path: '**', redirectTo: 'dashboard' },
 ];
 
