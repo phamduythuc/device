@@ -10,7 +10,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.settings.setDirection();
-    this.settings.setTheme();
+    // this.settings.setTheme();
   }
 
   ngAfterViewInit() {

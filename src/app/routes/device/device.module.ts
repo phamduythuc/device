@@ -15,6 +15,7 @@ import {QrCodeComponent} from './qr-code/qr-code.component';
 import {PrintQrCodeComponent} from './qr-code/print-qr-code/print-qr-code.component';
 import {NgxQRCodeModule} from '@techiediaries/ngx-qrcode';
 import {QRCodeModule} from 'angularx-qrcode';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {QRCodeModule} from 'angularx-qrcode';
         MaterialModule,
         NgxDropzoneModule,
         SharedModule,
-        QRCodeModule
+        QRCodeModule,
+        NgxPrintModule
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}

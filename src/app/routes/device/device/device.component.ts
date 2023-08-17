@@ -5,9 +5,10 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddDeviceComponent} from "../add-device/add-device.component";
 import {ComfirmDialogComponent} from "@shared/components/comfirm-dialog/comfirm-dialog.component";
 import {QrCodeComponent} from "../qr-code/qr-code.component";
+import { Router } from '@angular/router';
 
 export interface Device {
-    _id?: number | string | null;
+    id?: number | string | null;
     name?: string;
     seri?: string;
     date?: string;
@@ -27,7 +28,7 @@ export class DeviceComponent implements OnInit {
     displayColumns = ['STT', 'name', 'seri', 'type', 'status', 'action'];
 
 
-    constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog) {
+    constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog, public router: Router) {
     }
 
 
@@ -40,7 +41,7 @@ export class DeviceComponent implements OnInit {
 
     getDevices(): void {
         this.deviceService.getDevice(this.pageIndex, this.sizeIndex).subscribe(res => {
-                console.log(res)
+                console.log(res);
                 this.device = res.body.response;
                 // console.log(this.device);
             },
@@ -104,7 +105,7 @@ export class DeviceComponent implements OnInit {
                     action: action,
                     data: device
                 },
-                panelClass: ['w-[40%]', 'h-[60%]']
+                panelClass: ['w-[40%]', 'h-[50%]']
             });
         }
     }
@@ -112,18 +113,18 @@ export class DeviceComponent implements OnInit {
     deleteDevice(element: Device): void {
         const dialogRef = this.diaLog.open(ComfirmDialogComponent, {
             data: {
-                title: 'sád',
-                action: 'sdsd'
+                title: 'Xác nhận xóa',
+                action: 'delete'
             },
             panelClass: ['w-[35%]']
         });
         dialogRef.afterClosed().subscribe(res => {
-            if (res === 'confirm') {
-                this.deviceService.deleteDevice(element._id).subscribe(res => {
+            if (res === 'delete') {
+                this.deviceService.deleteDevice(element.id).subscribe(res => {
                     this.getDevices();
-                })
+                });
             }
-        })
+        });
     }
 
 

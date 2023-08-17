@@ -46,6 +46,7 @@ import {ReactiveFormsModule} from "@angular/forms";
                 useFactory: TranslateHttpLoaderFactory,
                 deps: [HttpClient],
             },
+            defaultLanguage: 'en-US'
         }),
         BrowserAnimationsModule,
     ],

@@ -41,7 +41,10 @@ const routes: Routes = [
   },
     {
       path : 'view-detail',
-      component: ViewQrCodeDeviceManagerComponent
+      component: AuthLayoutComponent,
+        children:[
+            { path: ':id', component: ViewQrCodeDeviceManagerComponent}
+        ]
     },
   { path: '**', redirectTo: 'dashboard' },
 ];
