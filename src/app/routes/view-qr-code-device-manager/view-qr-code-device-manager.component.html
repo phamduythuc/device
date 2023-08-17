@@ -1,1 +1,100 @@
-<p>view-qr-code-device-manager works!</p>
+<div class="w-full py-4 lg:px-6 xs:px-2 flex justify-center">
+    <div class="xl:w-[80%] xs:w-full  lg:px-5 xs:px-2 flex flex-col space-y-10">
+        <div class="w-full flex items-center xs:space-x-2 lg:pb-5 xs:pb-3  border-b">
+            <div class="lg:w-[30%]">
+                <img src="assets/images/avatar.jpg" alt="image-user" class="lg:w-1/2 xs:w-full rounded-full"/>
+            </div>
+            <div class="w-[70%]">
+                <div class="flex flex-col">
+                    <h3>Pham Duy Thuc</h3>
+                    <div class="flex space-x-3">
+                        <span class="font-semibold">Email:</span>
+                        <span>maitrantan86@gmail.com</span>
+                    </div>
+                    <div class="flex space-x-3">
+                        <span class="font-semibold">SDT:</span>
+                        <span class="xs:font-semibold">0373999999</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid xl:grid-cols-12 grid-cols-12 gap-x-3 gap-y-5">
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Tên thiết bị</span>
+                    <span>Macbook Ari 3</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Mã serial</span>
+                    <span>JHSJKDD88666A</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Loại thiết bị</span>
+                    <span>Laptop</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Ngày nhập thiết bị</span>
+                    <span>09-08-2023</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Người bàn giao thiết bị</span>
+                    <span>Quản lý kho</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Ngày bàn giao</span>
+                    <span>10-08-2023</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Tình trạng máy</span>
+                    <span>New</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Vị trí làm việc</span>
+                    <span>New</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 xs:col-span-6">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Nơi làm việc</span>
+                    <span>Bên khách hàng</span>
+                </div>
+            </div>
+            <div class="col-span-12">
+                <div class="flex flex-col">
+                    <span class="font-semibold">Thông tin ghi chú</span>
+                    <span>Máy mang đi onsite</span>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-12 gap-y-3">
+            <h3 class="lg:col-span-3 xs:col-span-6 font-semibold">Thông tin hình ảnh</h3>
+            <div class="w-full col-span-12 flex lg:flex-nowrap xs:flex-wrap">
+                <div class="w-1/2 h-1/2"
+                     *ngFor="let item of items ; let i = index"
+                     [lightbox]="i"
+                     [gallery]="galleryId">
+                    <img [src]="item.data?.src" [alt]="'img' + i" class="w-full h-full object-cover"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

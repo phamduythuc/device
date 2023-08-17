@@ -10,7 +10,7 @@
             <p>noi dung cua dialog o day</p>
         </div>
         <div class="my-3 w-full flex items-center justify-center space-x-4">
-            <button mat-raised-button>Confirm</button>
+            <button mat-raised-button (click)="onConfirm()">Confirm</button>
             <button mat-raised-button (click)="dialogRef.close()">Cancel</button>
         </div>
     </div>

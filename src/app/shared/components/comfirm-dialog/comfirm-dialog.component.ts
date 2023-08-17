@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogRef} from "@angular/cdk/dialog";
 
 @Component({
@@ -8,7 +8,16 @@ import {DialogRef} from "@angular/cdk/dialog";
   styleUrls: ['./comfirm-dialog.component.scss']
 })
 export class ComfirmDialogComponent {
-    constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: DialogRef) {
+    constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ComfirmDialogComponent>) {
+    }
+    ngOnInit() {
+        console.log(this.data)
+    }
+    onConfirm () {
+        this.dialogRef.close('confirm')
+    }
+    onCancel(){
+        this.dialogRef.close()
     }
 
 }

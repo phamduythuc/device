@@ -7,7 +7,7 @@ import {ComfirmDialogComponent} from "@shared/components/comfirm-dialog/comfirm-
 import {QrCodeComponent} from "../qr-code/qr-code.component";
 
 export interface Device {
-    id?: number | string | null;
+    _id?: number | string | null;
     name?: string;
     seri?: string;
     date?: string;
@@ -40,21 +40,29 @@ export class DeviceComponent implements OnInit {
 
     getDevices(): void {
         this.deviceService.getDevice(this.pageIndex, this.sizeIndex).subscribe(res => {
-                this.device = res;
-                console.log(this.device);
+                console.log(res)
+                this.device = res.body.response;
+                // console.log(this.device);
             },
         );
     }
 
     addDevice(): void {
         const diaLogRef = this.diaLog.open(AddDeviceComponent, {
-            data: {title: 'new'},
+            data: {
+                title: 'new',
+                action: 'new'
+            },
             panelClass: ['w-[80%]']
         });
+        diaLogRef.afterClosed().subscribe(res => {
+            this.getDevices()
+        })
     }
-    deviceAllocation (device: Device): void {
 
-        this.diaLog.open(AddDeviceComponent, {
+    deviceAllocation(device: Device): void {
+
+      const diaLogRef = this.diaLog.open(AddDeviceComponent, {
             data: {
                 title: "Device allocation",
                 action: 'allocate',
@@ -62,7 +70,11 @@ export class DeviceComponent implements OnInit {
             },
             panelClass: ['w-[80%]', 'h-[75%]']
         });
+        diaLogRef.afterClosed().subscribe(res => {
+            this.getDevices()
+        })
     }
+
     editDevice(device: Device): void {
         console.log(device);
         this.diaLog.open(AddDeviceComponent, {
@@ -74,6 +86,7 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]', 'h-[75%]']
         });
     }
+
     actionsDevice(device: Device, action: string): void {
         if (action !== 'qr-code') {
             this.diaLog.open(AddDeviceComponent, {
@@ -84,7 +97,7 @@ export class DeviceComponent implements OnInit {
                 },
                 panelClass: ['w-[80%]', 'h-[75%]']
             });
-        }else {
+        } else {
             this.diaLog.open(QrCodeComponent, {
                 data: {
                     title: 'View QR code',
@@ -95,14 +108,23 @@ export class DeviceComponent implements OnInit {
             });
         }
     }
-    deleteDevice(): void {
-        this.diaLog.open(ComfirmDialogComponent, {
+
+    deleteDevice(element: Device): void {
+        const dialogRef = this.diaLog.open(ComfirmDialogComponent, {
             data: {
-                title: '',
-                action: ''
+                title: 'sád',
+                action: 'sdsd'
             },
             panelClass: ['w-[35%]']
+        });
+        dialogRef.afterClosed().subscribe(res => {
+            if (res === 'confirm') {
+                this.deviceService.deleteDevice(element._id).subscribe(res => {
+                    this.getDevices();
+                })
+            }
         })
     }
+
 
 }
