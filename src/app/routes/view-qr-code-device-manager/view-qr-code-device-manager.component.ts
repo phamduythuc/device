@@ -55,7 +55,7 @@ export class ViewQrCodeDeviceManagerComponent implements OnInit {
     }
 
     getDetailDevice(id: number | string): void {
-        console.log(id);
+        // console.log(id);
         this.deviceService.getDetailIdDevice(id).subscribe(res => {
             this.element = res.body.response;
             console.log(this.element);
