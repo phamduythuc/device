@@ -23,9 +23,10 @@ export interface Device {
 })
 export class DeviceComponent implements OnInit {
     pageIndex = 0;
-    sizeIndex = 5;
-    device: Device[] = [];
+    sizeIndex = 10;
+    devices: Device[] = [];
     displayColumns = ['STT', 'name', 'seri', 'type', 'status', 'action'];
+    total: number = 0;
 
 
     constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog, public router: Router) {
@@ -33,16 +34,24 @@ export class DeviceComponent implements OnInit {
 
 
     ngOnInit() {
-        this.getDevices();
+        this.getDevices(this.pageIndex, this.sizeIndex);
         this.loginService.me().subscribe(res => {
         });
     }
 
-    getDevices(): void {
-        this.deviceService.getDevice(this.pageIndex, this.sizeIndex).subscribe(res => {
-                this.device = res.body.response;
+    getDevices(pageIndex: number, sizIndex: number): void {
+        this.deviceService.getDevice(pageIndex, sizIndex).subscribe(res => {
+                this.devices = res.body.response;
+                this.total = res.body.total;
             },
         );
+    }
+
+    getCurrentPage(event: any): void {
+        console.log(event);
+        this.sizeIndex = event.pageSize;
+        this.pageIndex = event.pageIndex;
+        this.getDevices(this.pageIndex, this.sizeIndex);
     }
 
     addDevice(): void {
@@ -54,7 +63,7 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]'],
         });
         diaLogRef.afterClosed().subscribe(res => {
-            this.getDevices();
+            this.getDevices(this.pageIndex, this.sizeIndex);
         });
     }
 
@@ -69,7 +78,7 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]', 'h-[75%]'],
         });
         diaLogRef.afterClosed().subscribe(res => {
-            this.getDevices();
+            this.getDevices(this.pageIndex, this.sizeIndex);
         });
     }
 
@@ -83,7 +92,7 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]', 'h-[75%]'],
         });
         diaLogRef.afterClosed().subscribe(res => {
-            this.getDevices();
+            this.getDevices(this.pageIndex, this.sizeIndex);
         });
     }
 
@@ -120,7 +129,7 @@ export class DeviceComponent implements OnInit {
         dialogRef.afterClosed().subscribe(res => {
             if (res === 'delete') {
                 this.deviceService.deleteDevice(element.id).subscribe(res => {
-                    this.getDevices();
+                    this.getDevices(this.pageIndex, this.sizeIndex);
                 });
             }
         });

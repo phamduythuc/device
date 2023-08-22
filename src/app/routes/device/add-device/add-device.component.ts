@@ -5,6 +5,7 @@ import { DeviceService } from '../service/device.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { checkValidTime, DateValidator } from './dateValidator';
+import { MyImage } from '@core/image';
 
 @Component({
     selector: 'app-add-device',
@@ -15,7 +16,7 @@ export class AddDeviceComponent implements OnInit {
     files: any = [];
     devices: string[] = ['PC', 'Laptop', 'Phone'];
     handover_person: string[] = ['HR', 'IT Hepdedk', 'Manage'];
-    onsite: string[] = ['Yes', 'No'];
+    onsite = [{ id: 1, label: 'Yes' }, { id: 0, label: 'No' }];
     allocate: boolean = false;
     formGroup!: FormGroup;
     formHandOver!: FormGroup;
@@ -30,6 +31,7 @@ export class AddDeviceComponent implements OnInit {
     }
 
     ngOnInit() {
+
         if (this.data) {
             this.interactiveAction();
         }
@@ -49,6 +51,7 @@ export class AddDeviceComponent implements OnInit {
             }
             case 'edit': {
                 this.getDataAddDevice();
+                this.getImageDropzone();
                 break;
             }
             case 'view': {
@@ -70,11 +73,11 @@ export class AddDeviceComponent implements OnInit {
             status: ['', [Validators.required]],
             handover_person: ['', [Validators.required]],
             position: ['', [Validators.required]],
-            dateOfDelivery: ['', [Validators.required, checkValidTime(this.formGroup.get('deviceAddDate'))]],
-            email: ['', [Validators.required]],
+            dateOfDelivery: [null, [Validators.required, checkValidTime(this.formGroup.get('deviceAddDate'))]],
+            email: ['', [Validators.required, Validators.email]],
             onsite: ['', [Validators.required]],
             note: [''],
-            hotline: ['', [Validators.required]],
+            hotline: ['', [Validators.required, Validators.pattern('(84|0[3|5|7|8|9])+([0-9]{8})\\b')]],
         });
     }
 
@@ -93,13 +96,12 @@ export class AddDeviceComponent implements OnInit {
             name: this.data.data?.name,
             type: this.data.data?.type,
             serial: this.data.data?.serial,
-            deviceAddDate: this.data.data?.purchase_date,
+            deviceAddDate: this.data.data?.deviceAddDate,
         };
         this.formGroup.patchValue(data);
     }
 
     getDataReceiveDevice(): void {
-        console.log(this.data);
         const data = {
             receiver: this.data.data?.allotment?.receiver,
             status: this.data.data?.allotment?.status,
@@ -111,24 +113,59 @@ export class AddDeviceComponent implements OnInit {
             note: this.data.data?.allotment?.note,
             hotline: this.data.data?.allotment?.hotline,
         };
-        console.log(data);
         this.formHandOver.patchValue(data);
     }
+
     checkInvalid(): boolean {
         if (this.data.action === 'new' || this.data.action === 'edit') {
             return this.formGroup.invalid;
-        }else {
+        } else {
             return this.formGroup.invalid || this.formHandOver.invalid;
         }
     }
 
+    getImageDropzone(): void {
+        const url = 'http://localhost:3000/img/photo-69b7jn-1692693053265.jpg'
+        fetch(url).then(response => response.blob()).then(response => {
+            const file = new File([response], 'data-photo.jpg', {type: 'image/jpg'})
+            console.log(file);
+            this.files.push(file)
+        })
+
+        // const files: File[] = [];
+        // console.log(this.data);
+        // this.data.data?.photo.forEach((imageUrl: any) => {
+        //     fetch(imageUrl).then((response) => response.blob()).then(blob => {
+        //         console.log(blob);
+        //         const imageFile = new File([blob], 'photo.png', { type: 'image/png' });
+        //         // Thêm đối tượng File vào danh sách
+        //         files.push(imageFile);
+        //     })
+        // })
+        // for (const image of this.data.data?.photo) {
+        //     const fileName = `acc-${image}`;
+        //     const imageBlob = this.dataURItoBlob_new(image.base64);
+        //     const imageFile = new File([imageBlob], fileName, { type: 'image/png' });
+        //     files.push(imageFile);
+        // }
+        // this.files.push(...files);
+        // console.log(this.files);
+    }
+
     addNewDevice() {
         const device = this.formGroup.value;
-        this.deviceService.addDevice(device).subscribe(res => {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(device));
+        for (const file of this.files) {
+            formData.append('photo', file);
+        }
+
+        this.deviceService.addDevice(formData).subscribe(res => {
             this.diaLogRef.close();
             this.toastrService.success('Add success');
         });
     }
+
     editDevice() {
         const device = this.formGroup.value;
         const id = this.data.data.id;
@@ -167,10 +204,30 @@ export class AddDeviceComponent implements OnInit {
 
 
     onSelect(event: any) {
-        this.files = [...event.addedFiles];
+        this.files.push(...event.addedFiles);
     }
 
     onRemove(event: any) {
         this.files.splice(this.files.indexOf(event), 1);
+    }
+
+    dataURItoBlob_new(dataURI: any) {
+
+        // Lấy loại dữ liệu (ví dụ: image/png)
+        const type = dataURI.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
+
+        // Giải mã dữ liệu base64
+        const byteString = atob(dataURI.split(',')[1]);
+
+        // Chuyển đổi thành ArrayBuffer
+        const buffer = new ArrayBuffer(byteString.length);
+        const view = new Uint8Array(buffer);
+        for (let i = 0; i < byteString.length; i++) {
+            view[i] = byteString.charCodeAt(i);
+        }
+
+        // Tạo đối tượng Blob
+        return new Blob([buffer], { type: type });
+
     }
 }

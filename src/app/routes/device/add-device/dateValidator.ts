@@ -1,4 +1,7 @@
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import * as moment from 'moment';
+import { of, take } from 'rxjs';
+import { skip } from 'rxjs/operators';
 
 export function DateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -13,16 +16,15 @@ export function DateValidator(): ValidatorFn {
 
 export function checkValidTime(valueDateBuy: any): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        const dateBuy = valueDateBuy.value as Date;
-        console.log(dateBuy);
-        console.log(control.value);
         const value = control.value;
-        const curentDate = new Date();
-        if (value < dateBuy || value > curentDate) {
+        if (value === null) {
+            return value;
+        }
+        const dateBuy = moment(valueDateBuy.value);
+        const curentDate = moment(new Date());
+        if (moment(value) < dateBuy || moment(value) > curentDate) {
             return {failTime: true };
         }
         return null;
-
-
     };
 }

@@ -16,7 +16,18 @@ import {PrintQrCodeComponent} from './qr-code/print-qr-code/print-qr-code.compon
 import {NgxQRCodeModule} from '@techiediaries/ngx-qrcode';
 import {QRCodeModule} from 'angularx-qrcode';
 import { NgxPrintModule } from 'ngx-print';
-
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+export const MY_FORMATS = {
+    parse: {
+        dateInput: 'LL',
+    },
+    display: {
+        dateInput: 'YYYY-MM-DD',
+        monthYearLabel: 'YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'YYYY',
+    },
+};
 @NgModule({
     declarations: [
         DeviceComponent,
@@ -36,7 +47,8 @@ import { NgxPrintModule } from 'ngx-print';
         NgxPrintModule
     ],
     providers: [
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+        {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}
     ]
 })
 export class DeviceModule {

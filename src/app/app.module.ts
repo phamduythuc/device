@@ -26,6 +26,8 @@ import {LoginService} from '@core/authentication/login.service';
 import {FakeLoginService} from './fake-login.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from "@angular/forms";
+import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 @NgModule({
     declarations: [AppComponent],
@@ -55,8 +57,11 @@ import {ReactiveFormsModule} from "@angular/forms";
         {provide: LoginService, useClass: FakeLoginService}, // <= Remove it in the real APP
         httpInterceptorProviders,
         appInitializerProviders,
+
     ],
     bootstrap: [AppComponent],
 })
 export class AppModule {
 }
+
+
