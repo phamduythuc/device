@@ -41,6 +41,7 @@ export class AddDeviceComponent implements OnInit {
         switch (this.data.action) {
             case 'allocate': {
                 this.getDataAddDevice();
+                this.getImageDropzone();
                 this.formGroup.disable();
                 this.addControl();
                 if (this.data.data.allotment) {
@@ -60,6 +61,7 @@ export class AddDeviceComponent implements OnInit {
                 this.formHandOver.disable();
                 this.allocate = true;
                 this.getDataAddDevice();
+                this.getImageDropzone()
                 this.getDataReceiveDevice();
             }
 
@@ -125,31 +127,14 @@ export class AddDeviceComponent implements OnInit {
     }
 
     getImageDropzone(): void {
-        const url = 'http://localhost:3000/img/photo-69b7jn-1692693053265.jpg'
-        fetch(url).then(response => response.blob()).then(response => {
-            const file = new File([response], 'data-photo.jpg', {type: 'image/jpg'})
-            console.log(file);
-            this.files.push(file)
+        console.log(this.data.data);
+        this.data.data?.photo.forEach((imageUrl: any) => {
+            const url = this.deviceService.getUrlImage(imageUrl)
+            fetch(url).then(response => response.blob()).then(blob => {
+                const file = new File([blob], imageUrl, {type: 'image/jpg'})
+                this.files.push(file)
+            })
         })
-
-        // const files: File[] = [];
-        // console.log(this.data);
-        // this.data.data?.photo.forEach((imageUrl: any) => {
-        //     fetch(imageUrl).then((response) => response.blob()).then(blob => {
-        //         console.log(blob);
-        //         const imageFile = new File([blob], 'photo.png', { type: 'image/png' });
-        //         // Thêm đối tượng File vào danh sách
-        //         files.push(imageFile);
-        //     })
-        // })
-        // for (const image of this.data.data?.photo) {
-        //     const fileName = `acc-${image}`;
-        //     const imageBlob = this.dataURItoBlob_new(image.base64);
-        //     const imageFile = new File([imageBlob], fileName, { type: 'image/png' });
-        //     files.push(imageFile);
-        // }
-        // this.files.push(...files);
-        // console.log(this.files);
     }
 
     addNewDevice() {
@@ -169,7 +154,12 @@ export class AddDeviceComponent implements OnInit {
     editDevice() {
         const device = this.formGroup.value;
         const id = this.data.data.id;
-        this.deviceService.updateDevice(id, device).subscribe(res => {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(device));
+        for (const file of this.files) {
+            formData.append('photo', file);
+        }
+        this.deviceService.updateDevice(id, formData).subscribe(res => {
             this.diaLogRef.close();
             this.toastrService.success('Add success');
         });
@@ -209,25 +199,5 @@ export class AddDeviceComponent implements OnInit {
 
     onRemove(event: any) {
         this.files.splice(this.files.indexOf(event), 1);
-    }
-
-    dataURItoBlob_new(dataURI: any) {
-
-        // Lấy loại dữ liệu (ví dụ: image/png)
-        const type = dataURI.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/)[1];
-
-        // Giải mã dữ liệu base64
-        const byteString = atob(dataURI.split(',')[1]);
-
-        // Chuyển đổi thành ArrayBuffer
-        const buffer = new ArrayBuffer(byteString.length);
-        const view = new Uint8Array(buffer);
-        for (let i = 0; i < byteString.length; i++) {
-            view[i] = byteString.charCodeAt(i);
-        }
-
-        // Tạo đối tượng Blob
-        return new Blob([buffer], { type: type });
-
     }
 }
