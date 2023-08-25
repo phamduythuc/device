@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DeviceService } from '../service/device.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToastrService } from 'ngx-toastr';
-import { checkValidTime, DateValidator } from './dateValidator';
-import { MyImage } from '@core/image';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DeviceService} from '../service/device.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ToastrService} from 'ngx-toastr';
+import {checkValidTime, DateValidator} from './dateValidator';
+import {MyImage} from '@core/image';
 
 @Component({
     selector: 'app-add-device',
@@ -16,7 +16,7 @@ export class AddDeviceComponent implements OnInit {
     files: any = [];
     devices: string[] = ['PC', 'Laptop', 'Phone'];
     handover_person: string[] = ['HR', 'IT Hepdedk', 'Manage'];
-    onsite = [{ id: 1, label: 'Yes' }, { id: 0, label: 'No' }];
+    onsite = [{id: 1, label: 'Yes'}, {id: 0, label: 'No'}];
     allocate: boolean = false;
     formGroup!: FormGroup;
     formHandOver!: FormGroup;
@@ -129,27 +129,9 @@ export class AddDeviceComponent implements OnInit {
         fetch(url).then(response => response.blob()).then(response => {
             const file = new File([response], 'data-photo.jpg', {type: 'image/jpg'})
             console.log(file);
-            this.files.push(file)
-        })
+            this.files.push(file);
+        });
 
-        // const files: File[] = [];
-        // console.log(this.data);
-        // this.data.data?.photo.forEach((imageUrl: any) => {
-        //     fetch(imageUrl).then((response) => response.blob()).then(blob => {
-        //         console.log(blob);
-        //         const imageFile = new File([blob], 'photo.png', { type: 'image/png' });
-        //         // Thêm đối tượng File vào danh sách
-        //         files.push(imageFile);
-        //     })
-        // })
-        // for (const image of this.data.data?.photo) {
-        //     const fileName = `acc-${image}`;
-        //     const imageBlob = this.dataURItoBlob_new(image.base64);
-        //     const imageFile = new File([imageBlob], fileName, { type: 'image/png' });
-        //     files.push(imageFile);
-        // }
-        // this.files.push(...files);
-        // console.log(this.files);
     }
 
     addNewDevice() {
@@ -227,7 +209,7 @@ export class AddDeviceComponent implements OnInit {
         }
 
         // Tạo đối tượng Blob
-        return new Blob([buffer], { type: type });
+        return new Blob([buffer], {type: type});
 
     }
 }
