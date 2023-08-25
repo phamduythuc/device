@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Device } from '../device/device.component';
+import {environment} from '@env/environment';
 
 const urlApi = 'http://localhost:3000/api/v1';
 
@@ -41,6 +42,9 @@ export class DeviceService {
 
     getUser(): Observable<any> {
         return this.http.get<Device>('user/role-user');
+    }
+    getUrlImage(url: string): string {
+        return environment.imgUrl + url;
     }
 
 }

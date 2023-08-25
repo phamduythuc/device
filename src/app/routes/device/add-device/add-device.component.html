@@ -69,7 +69,7 @@
                 <div class='w-full mt-2 mb-5'>
                     <mat-label><span>Image</span></mat-label>
                     <ngx-dropzone #drop (change)='onSelect($event)' accept='image/jpeg,image/jpg,image/png,image/gif'
-                                  [multiple]='true'>
+                                  [multiple]='true' [disabled]='data.action === "allocate" || data.action === "view"'>
                         <ngx-dropzone-label>Select image!</ngx-dropzone-label>
                         <ngx-dropzone-image-preview ngProjectAs='ngx-dropzone-preview' *ngFor='let f of files'
                                                     [file]='f'
@@ -165,8 +165,8 @@
 
                 <div class='w-full'>
                     <mat-label>Ghi chú</mat-label>
-                    <mat-form-field class='w-full'>
-                        <textarea matInput placeholder='Ex. It makes me feel...'></textarea>
+                    <mat-form-field class='w-full' >
+                        <textarea matInput formControlName='note' placeholder='Ex. It makes me feel...'></textarea>
                     </mat-form-field>
                 </div>
             </form>
