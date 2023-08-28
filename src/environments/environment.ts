@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    baseUrl: 'http://localhost:4200',
+    baseUrl: '',
     imgUrl: 'https://murmuring-earth-44459-483a895cb8bb.herokuapp.com/img/',
     apiUrl:'https://murmuring-earth-44459-483a895cb8bb.herokuapp.com/api/v1/',
     useHash: false,
