@@ -6,6 +6,7 @@ import { AddDeviceComponent } from '../add-device/add-device.component';
 import { ComfirmDialogComponent } from '@shared/components/comfirm-dialog/comfirm-dialog.component';
 import { QrCodeComponent } from '../qr-code/qr-code.component';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Device {
     id?: number | string | null;
@@ -29,10 +30,8 @@ export class DeviceComponent implements OnInit {
     total: number = 0;
 
 
-    constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog, public router: Router) {
+    constructor(private deviceService: DeviceService, private loginService: LoginService, public diaLog: MatDialog, public router: Router, private toastrService: ToastrService) {
     }
-
-
     ngOnInit() {
         this.getDevices(this.pageIndex, this.sizeIndex);
         this.loginService.me().subscribe(res => {
@@ -63,7 +62,9 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]'],
         });
         diaLogRef.afterClosed().subscribe(res => {
-            this.getDevices(this.pageIndex, this.sizeIndex);
+            if (res === 'reload') {
+                this.getDevices(this.pageIndex, this.sizeIndex);
+            }
         });
     }
 
@@ -78,7 +79,9 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]', 'h-[75%]'],
         });
         diaLogRef.afterClosed().subscribe(res => {
-            this.getDevices(this.pageIndex, this.sizeIndex);
+            if (res === 'reload') {
+                this.getDevices(this.pageIndex, this.sizeIndex);
+            }
         });
     }
 
@@ -92,7 +95,9 @@ export class DeviceComponent implements OnInit {
             panelClass: ['w-[80%]', 'h-[75%]'],
         });
         diaLogRef.afterClosed().subscribe(res => {
-            this.getDevices(this.pageIndex, this.sizeIndex);
+            if (res === 'reload') {
+                this.getDevices(this.pageIndex, this.sizeIndex);
+            }
         });
     }
 
@@ -129,6 +134,7 @@ export class DeviceComponent implements OnInit {
         dialogRef.afterClosed().subscribe(res => {
             if (res === 'delete') {
                 this.deviceService.deleteDevice(element.id).subscribe(res => {
+                    this.toastrService.success('Delete success');
                     this.getDevices(this.pageIndex, this.sizeIndex);
                 });
             }
