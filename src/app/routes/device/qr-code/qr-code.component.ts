@@ -1,5 +1,6 @@
 import { Component, ElementRef, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-qr-code',
@@ -15,9 +16,9 @@ export class QrCodeComponent {
     }
 
     ngOnInit() {
-        console.log(this.data);
         this.id = this.data.data?.id;
     }
+
 
     dowloadQrcode(parent: any): void {
         let parentElement = null;
