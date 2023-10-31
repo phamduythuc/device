@@ -127,7 +127,6 @@ export class AddDeviceComponent implements OnInit {
     }
 
     getImageDropzone(): void {
-        console.log(this.data.data);
         this.data.data?.photo.forEach((imageUrl: any) => {
             const url = this.deviceService.getUrlImage(imageUrl)
             fetch(url).then(response => response.blob()).then(blob => {
@@ -146,7 +145,7 @@ export class AddDeviceComponent implements OnInit {
         }
 
         this.deviceService.addDevice(formData).subscribe(res => {
-            this.diaLogRef.close();
+            this.diaLogRef.close('reload');
             this.toastrService.success('Add success');
         });
     }
@@ -160,7 +159,7 @@ export class AddDeviceComponent implements OnInit {
             formData.append('photo', file);
         }
         this.deviceService.updateDevice(id, formData).subscribe(res => {
-            this.diaLogRef.close();
+            this.diaLogRef.close('reload');
             this.toastrService.success('Add success');
         });
     }
@@ -169,7 +168,7 @@ export class AddDeviceComponent implements OnInit {
         const allocate = this.formHandOver.value;
         const id = this.data.data.id;
         this.deviceService.addHandOverStaff(id, allocate).subscribe(res => {
-            this.diaLogRef.close();
+            this.diaLogRef.close('reload');
             this.toastrService.success('Update success');
         });
     }

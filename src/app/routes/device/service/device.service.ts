@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Device } from '../device/device.component';
 import {environment} from '@env/environment';
 
-const urlApi = 'http://localhost:3000/api/v1';
+const urlApi = environment.apiUrl;
 
 @Injectable({
     providedIn: 'root',
